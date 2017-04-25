@@ -29,22 +29,35 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var simulatorButton: UIButton!
     
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Start listening for aircraft location updates
+        let locationKey = DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation)
+        DJISDKManager.keyManager()?.startListeningForChanges(on: locationKey!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
+            if newValue != nil {
+                // DJIFlightControllerParamAircraftLocation is associated with a DJISDKLocation object
+                let aircraftCoordinates = newValue!.value! as! DJISDKLocation
+                
+                self.locationLabel.text = "Lat: \(aircraftCoordinates.coordinate.latitude) - Lng: \(aircraftCoordinates.coordinate.longitude)"
+                
+            }
+        })
+        
         // Start listening for battery updates
         let batteryLevelKey = DJIBatteryKey(param: DJIBatteryParamChargeRemainingInPercent)
-        DJISDKManager.keyManager()?.getValueFor(batteryLevelKey!, withCompletion: { [unowned self] (value: DJIKeyedValue?, error: Error?) in
-            guard error == nil && value != nil else {
+        DJISDKManager.keyManager()?.startListeningForChanges(on: batteryLevelKey!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
+            
+            if newValue != nil {
                 
-                self.batteryLabel.text = "Error";
-                return
+                self.batteryLabel.text = "\(newValue!.unsignedIntegerValue) %"
                 
             }
             
-            // DJIBatteryParamChargeRemainingInPercent is associated with a uint8_t value
-            self.batteryLabel.text = "\(value!.unsignedIntegerValue) %"
             
         })
         
@@ -81,7 +94,7 @@ class ViewController: UIViewController {
             return
         }
         
-        
+        // Get the current location of the aircraft before we launch the simulator
         let droneLocation = droneLocationValue.value as! DJISDKLocation
         let droneCoordinates = droneLocation.coordinate
         
@@ -98,7 +111,7 @@ class ViewController: UIViewController {
                                                             gpsSatellitesNumber: 12,
                                                             withCompletion: { (error) in
                                                                 if (error != nil) {
-                                                                    NSLog("Start Simulator Error: \(error.debugDescription)")
+                                                                    NSLog("Error starting simulator: \(error.debugDescription)")
                                                                 }
                 })
             }
