@@ -11,8 +11,9 @@ import DJISDK
 
 class ViewController: UIViewController {
     
-    let bridgeMode = false
-    let bridgeIP = "10.0.1.20"
+    let bridgeMode = true
+    let bridgeIP = "10.0.1.18"
+    
     fileprivate var _isSimulatorActive: Bool = false
     
     public var isSimulatorActive: Bool {
@@ -34,7 +35,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        DJISDKManager.registerApp(with: self)
         
         // Start listening for aircraft location updates
         let locationKey = DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation)
@@ -54,7 +56,7 @@ class ViewController: UIViewController {
             
             if newValue != nil {
                 
-                self.batteryLabel.text = "\(newValue!.unsignedIntegerValue) %"
+                self.batteryLabel.text = "Battery: \(newValue!.unsignedIntegerValue) %"
                 
             }
             
@@ -72,15 +74,50 @@ class ViewController: UIViewController {
     }
     
     // App registration
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        DJISDKManager.registerApp(with: self)
+        guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
+            return;
+        }
+        
+        
+        DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
+            if newValue != nil {
+                if newValue!.boolValue {
+                    
+                    // At this point, a product is connected so we can show it.
+                    print("we are in here")
+                    self.productConnected()
+                    
+                }
+            }
+        })
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func productConnected() {
+        
+        guard let newProduct = DJISDKManager.product() else {
+            print("Product is connected but DJISDKManager.product is nil -> something is wrong")
+            return;
+        }
+        
+        //Updates the product's model
+        print("Model: \((newProduct.model)!)")
+        
+        //Updates the product's firmware version - COMING SOON
+        newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in
+            
+            print("Firmware package version is: \(version ?? "Unknown")")
+        }
+        
+        //Updates the product's connection status
+        print("Product Connected")
     }
 
     
@@ -139,6 +176,7 @@ extension ViewController: DJISDKManagerDelegate {
         if bridgeMode {
             
             DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeIP)
+            print("Connecting via bridge")
             
         } else {
             
