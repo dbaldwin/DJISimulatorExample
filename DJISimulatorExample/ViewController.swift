@@ -8,8 +8,13 @@
 
 import UIKit
 import DJISDK
+import GoogleMaps
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var googleMapView: GMSMapView!
+    
+    var aircraftMarker: GMSMarker!
     
     fileprivate var _isSimulatorActive: Bool = false
     
@@ -40,6 +45,20 @@ class ViewController: UIViewController {
                 
                 self.locationLabel.text = "Lat: \(aircraftCoordinates.coordinate.latitude) - Lng: \(aircraftCoordinates.coordinate.longitude)"
                 
+                // Display the aircraft marker on the map
+                if (self.aircraftMarker == nil) {
+                    
+                    self.aircraftMarker = GMSMarker()
+                    self.aircraftMarker.map = self.googleMapView
+                    
+                    let camera = GMSCameraPosition.camera(withLatitude: aircraftCoordinates.coordinate.latitude, longitude: aircraftCoordinates.coordinate.longitude, zoom: 16)
+                    self.googleMapView.camera = camera
+                    
+                }
+                
+                self.aircraftMarker.position = aircraftCoordinates.coordinate
+                
+                
             }
         })
         
@@ -64,6 +83,11 @@ class ViewController: UIViewController {
                 }
             })
         }
+        
+        // Google Maps
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        googleMapView.camera = camera
+        googleMapView.mapType = GMSMapViewType.hybrid
     }
     
     override func viewWillAppear(_ animated: Bool) {
