@@ -13,6 +13,9 @@
 		232695A21EAF9E96003E8C57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232695A11EAF9E96003E8C57 /* Assets.xcassets */; };
 		232695A51EAF9E96003E8C57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232695A31EAF9E96003E8C57 /* LaunchScreen.storyboard */; };
 		232695B01EAF9E96003E8C57 /* DJISimulatorExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232695AF1EAF9E96003E8C57 /* DJISimulatorExampleTests.swift */; };
+		23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; };
+		23DB37BB1EB0F883001468F9 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */; };
 		6BFF0A532FD29526D12DA73C /* libPods-DJISimulatorExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +27,35 @@
 			remoteGlobalIDString = 232695961EAF9E96003E8C57;
 			remoteInfo = DJISimulatorExample;
 		};
+		23DB37B81EB0F866001468F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
+		23DB37BC1EB0F883001468F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		23DB37BE1EB0F883001468F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				23DB37BB1EB0F883001468F9 /* VideoPreviewer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		232695971EAF9E96003E8C57 /* DJISimulatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJISimulatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +68,8 @@
 		232695AB1EAF9E96003E8C57 /* DJISimulatorExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJISimulatorExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		232695AF1EAF9E96003E8C57 /* DJISimulatorExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJISimulatorExampleTests.swift; sourceTree = "<group>"; };
 		232695B11EAF9E96003E8C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
+		23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
 		349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DJISimulatorExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F7FC4C4B6249A3ECA2448 /* Pods-DJISimulatorExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DJISimulatorExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DJISimulatorExample/Pods-DJISimulatorExample.debug.xcconfig"; sourceTree = "<group>"; };
 		EE113D8EA3B2078E627C045D /* Pods-DJISimulatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DJISimulatorExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-DJISimulatorExample/Pods-DJISimulatorExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */,
 				6BFF0A532FD29526D12DA73C /* libPods-DJISimulatorExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +124,7 @@
 				232695A11EAF9E96003E8C57 /* Assets.xcassets */,
 				232695A31EAF9E96003E8C57 /* LaunchScreen.storyboard */,
 				232695A61EAF9E96003E8C57 /* Info.plist */,
+				23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */,
 			);
 			path = DJISimulatorExample;
 			sourceTree = "<group>";
@@ -103,9 +138,18 @@
 			path = DJISimulatorExampleTests;
 			sourceTree = "<group>";
 		};
+		23DB37B51EB0F866001468F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		35D4B774711BB527FA47697C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */,
 				349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */,
 			);
 			name = Frameworks;
@@ -133,10 +177,12 @@
 				232695951EAF9E96003E8C57 /* Resources */,
 				388F79F29A32967E60A7FB4D /* [CP] Embed Pods Frameworks */,
 				E5E1741FE2CB863C6A0D18BB /* [CP] Copy Pods Resources */,
+				23DB37BE1EB0F883001468F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				23DB37BD1EB0F883001468F9 /* PBXTargetDependency */,
 			);
 			name = DJISimulatorExample;
 			productName = DJISimulatorExample;
@@ -194,6 +240,12 @@
 			mainGroup = 2326958E1EAF9E96003E8C57;
 			productRefGroup = 232695981EAF9E96003E8C57 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 23DB37B51EB0F866001468F9 /* Products */;
+					ProjectRef = 23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				232695961EAF9E96003E8C57 /* DJISimulatorExample */,
@@ -201,6 +253,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VideoPreviewer.framework;
+			remoteRef = 23DB37B81EB0F866001468F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		232695951EAF9E96003E8C57 /* Resources */ = {
@@ -275,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */,
 				2326959D1EAF9E96003E8C57 /* ViewController.swift in Sources */,
 				2326959B1EAF9E96003E8C57 /* AppDelegate.swift in Sources */,
 			);
@@ -295,6 +358,11 @@
 			isa = PBXTargetDependency;
 			target = 232695961EAF9E96003E8C57 /* DJISimulatorExample */;
 			targetProxy = 232695AC1EAF9E96003E8C57 /* PBXContainerItemProxy */;
+		};
+		23DB37BD1EB0F883001468F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VideoPreviewer;
+			targetProxy = 23DB37BC1EB0F883001468F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
