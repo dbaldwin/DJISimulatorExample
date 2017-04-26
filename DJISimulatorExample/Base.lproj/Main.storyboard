@@ -69,6 +69,17 @@
                                     <constraint firstAttribute="height" constant="30" id="vaU-1L-wRd"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ep-XC-ZCs">
+                                <rect key="frame" x="158" y="91" width="132" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="O37-Nz-a2D"/>
+                                    <constraint firstAttribute="height" constant="30" id="fEp-ac-8Qa"/>
+                                </constraints>
+                                <state key="normal" title="Start Mission"/>
+                                <connections>
+                                    <action selector="startMission:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k3Y-kk-Pb2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -76,11 +87,13 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qbg-5N-5Kq" secondAttribute="bottom" constant="15" id="5x9-hj-7Dm"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mZb-xL-XE8" secondAttribute="bottom" constant="40" id="BoF-5o-IfV"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FW4-1z-D83"/>
+                            <constraint firstItem="7ep-XC-ZCs" firstAttribute="leading" secondItem="ljQ-8o-RAG" secondAttribute="trailing" constant="8" id="KDl-wI-ixu"/>
                             <constraint firstItem="mah-YU-fbO" firstAttribute="leading" secondItem="Ofq-QZ-DfA" secondAttribute="trailing" constant="10" id="R72-Wq-cWs"/>
                             <constraint firstItem="mah-YU-fbO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="aGt-ak-rO0"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="top" secondItem="Ofq-QZ-DfA" secondAttribute="bottom" constant="10" id="buD-4r-pAu"/>
                             <constraint firstItem="Qbg-5N-5Kq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dW4-rG-dxJ"/>
                             <constraint firstItem="Qbg-5N-5Kq" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dX0-Lx-JDu"/>
+                            <constraint firstItem="7ep-XC-ZCs" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="eB8-Ui-1Tv"/>
                             <constraint firstItem="Ofq-QZ-DfA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="if1-Wm-y91"/>
                             <constraint firstItem="Ofq-QZ-DfA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lnk-Xn-FpS"/>
                             <constraint firstItem="ljQ-8o-RAG" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="nxe-rE-Caa"/>
@@ -92,6 +105,7 @@
                         <outlet property="googleMapView" destination="Qbg-5N-5Kq" id="BCf-EG-iyJ"/>
                         <outlet property="locationLabel" destination="lxx-PH-uwe" id="bkR-Fm-hiN"/>
                         <outlet property="simulatorButton" destination="ljQ-8o-RAG" id="OfT-Y7-yBu"/>
+                        <outlet property="startMissionButton" destination="7ep-XC-ZCs" id="rDW-M6-OYQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

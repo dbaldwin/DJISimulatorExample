@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var simulatorButton: UIButton!
+    @IBOutlet weak var startMissionButton: UIButton!
     
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -174,6 +175,22 @@ class ViewController: UIViewController {
                                                                 }
                 })
             }
+        }
+        
+    }
+    
+    @IBAction func startMission(_ sender: Any) {
+        
+        let error = DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
+     
+        if (error != nil) {
+            
+            print("Error scheduling element")
+            
+        } else {
+         
+            DJISDKManager.missionControl()?.startTimeline()
+            
         }
         
     }
