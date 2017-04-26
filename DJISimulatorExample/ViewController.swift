@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var simulatorButton: UIButton!
     @IBOutlet weak var startMissionButton: UIButton!
-    
+    @IBOutlet weak var checklistButton: UIButton!
     
     @IBOutlet weak var locationLabel: UILabel!
     
@@ -176,6 +176,11 @@ class ViewController: UIViewController {
                 })
             }
         }
+        
+    }
+    
+    
+    @IBAction func showChecklist(_ sender: Any) {
         
     }
     
