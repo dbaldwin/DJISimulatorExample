@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,11 +54,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZb-xL-XE8" customClass="DULDashboardWidget">
+                                <rect key="frame" x="20" y="325" width="297.5" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HvK-Co-b3X"/>
+                                    <constraint firstAttribute="width" secondItem="mZb-xL-XE8" secondAttribute="height" multiplier="541:91" id="QzR-0g-4p2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="mZb-xL-XE8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0D3-u9-fgu"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="top" secondItem="sUv-gO-Ydu" secondAttribute="bottom" constant="24" id="5PL-0E-XW4"/>
                             <constraint firstItem="sUv-gO-Ydu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AJe-86-jqp"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mZb-xL-XE8" secondAttribute="bottom" id="BoF-5o-IfV"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FW4-1z-D83"/>
                             <constraint firstItem="sUv-gO-Ydu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="Omm-9s-3kF"/>
                             <constraint firstItem="ljQ-8o-RAG" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="25" id="nxe-rE-Caa"/>
