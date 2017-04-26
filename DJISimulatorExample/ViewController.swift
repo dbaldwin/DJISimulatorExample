@@ -181,18 +181,96 @@ class ViewController: UIViewController {
     
     @IBAction func startMission(_ sender: Any) {
         
-        let error = DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
-     
-        if (error != nil) {
-            
-            print("Error scheduling element")
-            
-        } else {
-         
-            DJISDKManager.missionControl()?.startTimeline()
-            
+        DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
+        DJISDKManager.missionControl()?.scheduleElement(defaultWaypointMission()!)
+        DJISDKManager.missionControl()?.startTimeline()
+        
+    }
+    
+    func defaultWaypointMission() -> DJIWaypointMission? {
+        let mission = DJIMutableWaypointMission()
+        mission.maxFlightSpeed = 15
+        mission.autoFlightSpeed = 8
+        mission.finishedAction = .noAction
+        mission.headingMode = .auto
+        mission.flightPathMode = .normal
+        mission.rotateGimbalPitch = true
+        mission.exitMissionOnRCSignalLost = true
+        
+        guard let droneLocationKey = DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation) else {
+            return nil
         }
         
+        guard let droneLocationValue = DJISDKManager.keyManager()?.getValueFor(droneLocationKey) else {
+            return nil
+        }
+        
+        let droneLocation = droneLocationValue.value as! DJISDKLocation
+        let droneCoordinates = droneLocation.coordinate
+        
+        if !CLLocationCoordinate2DIsValid(droneCoordinates) {
+            return nil
+        }
+        
+        mission.pointOfInterest = droneCoordinates
+        let offset = 0.0000899322
+        
+        let loc1 = CLLocationCoordinate2DMake(droneCoordinates.latitude + offset, droneCoordinates.longitude)
+        let waypoint1 = DJIWaypoint(coordinate: loc1)
+        waypoint1.altitude = 25
+        waypoint1.heading = 0
+        waypoint1.actionRepeatTimes = 1
+        waypoint1.actionTimeoutInSeconds = 60
+        waypoint1.cornerRadiusInMeters = 5
+        waypoint1.turnMode = .clockwise
+        waypoint1.gimbalPitch = 0
+        
+        let loc2 = CLLocationCoordinate2DMake(droneCoordinates.latitude, droneCoordinates.longitude + offset)
+        let waypoint2 = DJIWaypoint(coordinate: loc2)
+        waypoint2.altitude = 26
+        waypoint2.heading = 0
+        waypoint2.actionRepeatTimes = 1
+        waypoint2.actionTimeoutInSeconds = 60
+        waypoint2.cornerRadiusInMeters = 5
+        waypoint2.turnMode = .clockwise
+        waypoint2.gimbalPitch = -90
+        
+        let loc3 = CLLocationCoordinate2DMake(droneCoordinates.latitude - offset, droneCoordinates.longitude)
+        let waypoint3 = DJIWaypoint(coordinate: loc3)
+        waypoint3.altitude = 27
+        waypoint3.heading = 0
+        waypoint3.actionRepeatTimes = 1
+        waypoint3.actionTimeoutInSeconds = 60
+        waypoint3.cornerRadiusInMeters = 5
+        waypoint3.turnMode = .clockwise
+        waypoint3.gimbalPitch = 0
+        
+        let loc4 = CLLocationCoordinate2DMake(droneCoordinates.latitude, droneCoordinates.longitude - offset)
+        let waypoint4 = DJIWaypoint(coordinate: loc4)
+        waypoint4.altitude = 28
+        waypoint4.heading = 0
+        waypoint4.actionRepeatTimes = 1
+        waypoint4.actionTimeoutInSeconds = 60
+        waypoint4.cornerRadiusInMeters = 5
+        waypoint4.turnMode = .clockwise
+        waypoint4.gimbalPitch = -90
+        
+        let waypoint5 = DJIWaypoint(coordinate: loc1)
+        waypoint5.altitude = 29
+        waypoint5.heading = 0
+        waypoint5.actionRepeatTimes = 1
+        waypoint5.actionTimeoutInSeconds = 60
+        waypoint5.cornerRadiusInMeters = 5
+        waypoint5.turnMode = .clockwise
+        waypoint5.gimbalPitch = 0
+        
+        mission.add(waypoint1)
+        mission.add(waypoint2)
+        mission.add(waypoint3)
+        mission.add(waypoint4)
+        mission.add(waypoint5)
+        
+        return DJIWaypointMission(mission: mission)
     }
 
 }
