@@ -11,9 +11,6 @@ import DJISDK
 
 class ViewController: UIViewController {
     
-    let bridgeMode = true
-    let bridgeIP = "10.0.1.18"
-    
     fileprivate var _isSimulatorActive: Bool = false
     
     public var isSimulatorActive: Bool {
@@ -35,8 +32,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DJISDKManager.registerApp(with: self)
         
         // Start listening for aircraft location updates
         let locationKey = DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation)
@@ -73,26 +68,25 @@ class ViewController: UIViewController {
         }
     }
     
-    // App registration
     override func viewWillAppear(_ animated: Bool) {
         
         guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
             return;
         }
         
-        
-        DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
-            if newValue != nil {
-                if newValue!.boolValue {
-                    
-                    // At this point, a product is connected so we can show it.
-                    print("we are in here")
-                    self.productConnected()
-                    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
+                if newValue != nil {
+                    if newValue!.boolValue {
+                        
+                        DispatchQueue.main.async {
+                            self.productConnected()
+                        }
+                        
+                    }
                 }
-            }
-        })
-        
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,6 +112,12 @@ class ViewController: UIViewController {
         
         //Updates the product's connection status
         print("Product Connected")
+    }
+    
+    func productDisconnected() {
+        
+        print("Product disconnected")
+        
     }
 
     
@@ -156,34 +156,4 @@ class ViewController: UIViewController {
         
     }
 
-}
-
-extension ViewController: DJISDKManagerDelegate {
-    
-    func appRegisteredWithError(_ error: Error?) {
-     
-        if (error != nil) {
-            
-            print("Registration error \(error?.localizedDescription)")
-            
-        } else {
-            
-            print("Registration success")
-            
-        }
-        
-        
-        if bridgeMode {
-            
-            DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeIP)
-            print("Connecting via bridge")
-            
-        } else {
-            
-            DJISDKManager.startConnectionToProduct()
-            
-        }
-        
-    }
-    
 }
