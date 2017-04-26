@@ -23,18 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery: -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUv-gO-Ydu">
-                                <rect key="frame" x="20" y="90" width="220" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Kwt-QD-as6"/>
-                                    <constraint firstAttribute="width" constant="220" id="iFt-75-1mX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljQ-8o-RAG">
-                                <rect key="frame" x="20" y="180" width="130" height="30"/>
+                                <rect key="frame" x="20" y="91" width="130" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="Bpu-nx-wOe"/>
                                     <constraint firstAttribute="height" constant="30" id="rtK-dt-R41"/>
@@ -45,7 +35,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location: -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxx-PH-uwe">
-                                <rect key="frame" x="20" y="134" width="627" height="21"/>
+                                <rect key="frame" x="20" y="60" width="627" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="GWj-C4-ZbV"/>
                                     <constraint firstAttribute="width" constant="627" id="zFp-UO-Zua"/>
@@ -54,39 +44,51 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbg-5N-5Kq">
+                                <rect key="frame" x="20" y="131" width="627" height="229"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZb-xL-XE8" customClass="DULDashboardWidget">
                                 <rect key="frame" x="20" y="310" width="297.5" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="HvK-Co-b3X"/>
                                     <constraint firstAttribute="width" secondItem="mZb-xL-XE8" secondAttribute="height" multiplier="541:91" id="QzR-0g-4p2"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mah-YU-fbO" customClass="DULCameraConfigInfoWidget">
-                                <rect key="frame" x="20" y="20" width="332" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="103.5" y="20" width="311.5" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="QQ1-wv-4Xh"/>
+                                    <constraint firstAttribute="height" constant="30" id="QQ1-wv-4Xh"/>
                                     <constraint firstAttribute="width" secondItem="mah-YU-fbO" secondAttribute="height" multiplier="45:22" constant="250" id="k9b-t9-py1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-QZ-DfA" customClass="DULBatteryWidget">
+                                <rect key="frame" x="20" y="20" width="73.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ofq-QZ-DfA" secondAttribute="height" multiplier="22:9" id="OsC-Mz-pxw"/>
+                                    <constraint firstAttribute="height" constant="30" id="vaU-1L-wRd"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mZb-xL-XE8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0D3-u9-fgu"/>
-                            <constraint firstItem="lxx-PH-uwe" firstAttribute="top" secondItem="sUv-gO-Ydu" secondAttribute="bottom" constant="24" id="5PL-0E-XW4"/>
-                            <constraint firstItem="sUv-gO-Ydu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AJe-86-jqp"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qbg-5N-5Kq" secondAttribute="bottom" constant="15" id="5x9-hj-7Dm"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mZb-xL-XE8" secondAttribute="bottom" constant="15" id="BoF-5o-IfV"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FW4-1z-D83"/>
-                            <constraint firstItem="sUv-gO-Ydu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="70" id="Omm-9s-3kF"/>
+                            <constraint firstItem="mah-YU-fbO" firstAttribute="leading" secondItem="Ofq-QZ-DfA" secondAttribute="trailing" constant="10" id="R72-Wq-cWs"/>
                             <constraint firstItem="mah-YU-fbO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="aGt-ak-rO0"/>
-                            <constraint firstItem="mah-YU-fbO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bdc-q6-Qzg"/>
-                            <constraint firstItem="ljQ-8o-RAG" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="25" id="nxe-rE-Caa"/>
+                            <constraint firstItem="lxx-PH-uwe" firstAttribute="top" secondItem="Ofq-QZ-DfA" secondAttribute="bottom" constant="10" id="buD-4r-pAu"/>
+                            <constraint firstItem="Qbg-5N-5Kq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dW4-rG-dxJ"/>
+                            <constraint firstItem="Qbg-5N-5Kq" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dX0-Lx-JDu"/>
+                            <constraint firstItem="Ofq-QZ-DfA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="if1-Wm-y91"/>
+                            <constraint firstItem="Ofq-QZ-DfA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lnk-Xn-FpS"/>
+                            <constraint firstItem="ljQ-8o-RAG" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="nxe-rE-Caa"/>
                             <constraint firstItem="ljQ-8o-RAG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="tgF-Go-05T"/>
+                            <constraint firstItem="Qbg-5N-5Kq" firstAttribute="top" secondItem="ljQ-8o-RAG" secondAttribute="bottom" constant="10" id="uRt-3Q-6J7"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="batteryLabel" destination="sUv-gO-Ydu" id="zua-Yf-fre"/>
                         <outlet property="locationLabel" destination="lxx-PH-uwe" id="bkR-Fm-hiN"/>
                         <outlet property="simulatorButton" destination="ljQ-8o-RAG" id="OfT-Y7-yBu"/>
                     </connections>

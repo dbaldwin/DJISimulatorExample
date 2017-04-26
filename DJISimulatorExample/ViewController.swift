@@ -22,8 +22,6 @@ class ViewController: UIViewController {
             self.simulatorButton.titleLabel?.text = _isSimulatorActive ? "Stop Simulator" : "Start Simulator"
         }
     }
-
-    @IBOutlet weak var batteryLabel: UILabel!
     
     @IBOutlet weak var simulatorButton: UIButton!
     
@@ -46,7 +44,7 @@ class ViewController: UIViewController {
         })
         
         // Start listening for battery updates
-        let batteryLevelKey = DJIBatteryKey(param: DJIBatteryParamChargeRemainingInPercent)
+        /*let batteryLevelKey = DJIBatteryKey(param: DJIBatteryParamChargeRemainingInPercent)
         DJISDKManager.keyManager()?.startListeningForChanges(on: batteryLevelKey!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
             
             if newValue != nil {
@@ -56,7 +54,7 @@ class ViewController: UIViewController {
             }
             
             
-        })
+        })*/
         
         // Listen for simulator status updates
         if let isSimulatorActiveKey = DJIFlightControllerKey(param: DJIFlightControllerParamIsSimulatorActive) {
