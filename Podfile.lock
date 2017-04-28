@@ -1,12 +1,22 @@
 PODS:
   - DJI-SDK-iOS (4.0.1)
+  - DJI-UILibrary-iOS (4.0.1.1.0.0)
+  - GoogleMaps (2.2.0):
+    - GoogleMaps/Maps (= 2.2.0)
+  - GoogleMaps/Base (2.2.0)
+  - GoogleMaps/Maps (2.2.0):
+    - GoogleMaps/Base
 
 DEPENDENCIES:
-  - DJI-SDK-iOS (~> 4.0)
+  - DJI-SDK-iOS (~> 4.0.1)
+  - DJI-UILibrary-iOS (~> 4.0.1.1.0.0)
+  - GoogleMaps
 
 SPEC CHECKSUMS:
   DJI-SDK-iOS: 2b41afc24ef6388feb035c8bc1fb72fd535ec256
+  DJI-UILibrary-iOS: ec4757392b353797eb8998426f9cc385a0625e71
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
 
-PODFILE CHECKSUM: 20cb44bfb21f8a930148e5aa41fcc6d1d6c46b4b
+PODFILE CHECKSUM: c4a60135e859f50e44cb47c8784aaa2db2ae5f06
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.1.1
