@@ -93,6 +93,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        super.viewWillAppear(animated)
+        
         guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
             return;
         }
