@@ -188,6 +188,10 @@ class ViewController: UIViewController {
         
         DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
         DJISDKManager.missionControl()?.scheduleElement(defaultWaypointMission()!)
+        
+        let attitude = DJIGimbalAttitude(pitch: 30.0, roll: 0.0, yaw: 0.0)
+        DJISDKManager.missionControl()?.scheduleElement(DJIGimbalAttitudeAction(attitude: attitude)!)
+        
         DJISDKManager.missionControl()?.startTimeline()
         
     }
