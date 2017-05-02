@@ -8,13 +8,17 @@
 
 import UIKit
 import DJISDK
+import VideoPreviewer
 import GoogleMaps
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var googleMapView: GMSMapView!
+    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var debugLabel: UILabel!
     
     var aircraftMarker: GMSMarker!
+    var camera: DJICamera?
     
     fileprivate var _isSimulatorActive: Bool = false
     
@@ -113,6 +117,19 @@ class ViewController: UIViewController {
             })
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        VideoPreviewer.instance().setView(cameraView)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        VideoPreviewer.instance().unSetView()
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -137,6 +154,22 @@ class ViewController: UIViewController {
         
         //Updates the product's connection status
         print("Product Connected")
+        
+        // Setup the camera
+        camera = DJISDKManager.product()?.camera
+        
+        if (camera != nil) {
+            print("Setting up the camera delegate")
+            
+            debugLabel.text = "Debug: camera is setup"
+            
+            camera?.delegate = self;
+        }
+        
+        // Setup the video feed
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
+        
     }
     
     func productDisconnected() {
@@ -284,4 +317,28 @@ class ViewController: UIViewController {
         return DJIWaypointMission(mission: mission)
     }
 
+}
+
+extension ViewController : DJICameraDelegate {
+    
+    // Make sure the photo is written to the SD card
+    func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
+        
+    }
+    
+}
+
+extension ViewController : DJIVideoFeedListener {
+    
+    func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {
+        
+        videoData.withUnsafeBytes {
+            (ptr: UnsafePointer<UInt8>) in
+            
+            let mutablePointer = UnsafeMutablePointer(mutating: ptr)
+            
+            VideoPreviewer.instance().push(mutablePointer, length: Int32(videoData.count))
+        }
+    }
+    
 }
