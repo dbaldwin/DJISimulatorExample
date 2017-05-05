@@ -35,8 +35,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var simulatorButton: UIButton!
     @IBOutlet weak var startMissionButton: UIButton!
     @IBOutlet weak var checklistButton: UIButton!
-    
+    @IBOutlet weak var shootPhotoButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    
+    var isStoringPhoto: Bool = false {
+        didSet {
+            checkPhotoSaved()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +150,8 @@ class ViewController: UIViewController {
         }
         
         //Updates the product's model
-        print("Model: \((newProduct.model)!)")
+        debugLabel.text = newProduct.model!
+
         
         //Updates the product's firmware version - COMING SOON
         newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in
@@ -152,13 +159,11 @@ class ViewController: UIViewController {
             print("Firmware package version is: \(version ?? "Unknown")")
         }
         
-        //Updates the product's connection status
-        print("Product Connected")
-        
         // Setup the camera
-        camera = DJISDKManager.product()?.camera
+        camera = fetchCamera()
         
-        if (camera != nil) {
+        if camera != nil {
+            
             print("Setting up the camera delegate")
             
             debugLabel.text = "Debug: camera is setup"
@@ -167,14 +172,8 @@ class ViewController: UIViewController {
         }
         
         // Setup the video feed
-        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        VideoPreviewer.instance().start()
-        
-    }
-    
-    func productDisconnected() {
-        
-        print("Product disconnected")
+        /*DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()*/
         
     }
 
@@ -214,6 +213,46 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func shootPhoto(_ sender: Any) {
+        
+        let camera: DJICamera? = fetchCamera()
+        
+        camera!.startShootPhoto(completion: { (error) in
+            
+            if (error != nil) {
+                print("Shoot photo error: \(error.debugDescription)")
+            }
+            
+        })
+        
+    }
+    
+    func fetchCamera() -> DJICamera? {
+        
+        if DJISDKManager.product() == nil {
+            return nil
+        }
+        
+        if DJISDKManager.product() is DJIAircraft {
+            return (DJISDKManager.product() as! DJIAircraft).camera
+        } else if DJISDKManager.product() is DJIHandheld {
+            return (DJISDKManager.product() as! DJIHandheld).camera
+        }
+        
+        return nil
+    }
+    
+    // Called from property observer and will trigger the segue to map view
+    // Since didgeneratenewmediafile delegate is not being called
+    func checkPhotoSaved() {
+        
+        if isStoringPhoto {
+            
+            print("Photo is being saved")
+            
+        }
+        
+    }
     
     @IBAction func showChecklist(_ sender: Any) {
         
@@ -322,7 +361,17 @@ class ViewController: UIViewController {
 extension ViewController : DJICameraDelegate {
     
     // Make sure the photo is written to the SD card
+    // This does not appears to work in SDK 4.0.1 so we're using didUpdate systemState as a workaround
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
+        
+        print("Photo was saved successfully")
+        
+    }
+    
+    func camera(_ camera: DJICamera, didUpdate systemState: DJICameraSystemState) {
+        
+        self.isStoringPhoto = systemState.isStoringPhoto
+        
         
     }
     
