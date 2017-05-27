@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         DJISDKManager.keyManager()?.startListeningForChanges(on: locationKey!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
             if newValue != nil {
                 // DJIFlightControllerParamAircraftLocation is associated with a DJISDKLocation object
-                let aircraftCoordinates = newValue!.value! as! DJISDKLocation
+                let aircraftCoordinates = newValue!.value! as! CLLocation
                 
                 self.locationLabel.text = "Lat: \(aircraftCoordinates.coordinate.latitude) - Lng: \(aircraftCoordinates.coordinate.longitude)"
                 
@@ -172,8 +172,8 @@ class ViewController: UIViewController {
         }
         
         // Setup the video feed
-        /*DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        VideoPreviewer.instance().start()*/
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
         
     }
 
@@ -189,7 +189,7 @@ class ViewController: UIViewController {
         }
         
         // Get the current location of the aircraft before we launch the simulator
-        let droneLocation = droneLocationValue.value as! DJISDKLocation
+        let droneLocation = droneLocationValue.value as! CLLocation
         let droneCoordinates = droneLocation.coordinate
         
         if let aircraft = DJISDKManager.product() as? DJIAircraft {
@@ -288,7 +288,7 @@ class ViewController: UIViewController {
             return nil
         }
         
-        let droneLocation = droneLocationValue.value as! DJISDKLocation
+        let droneLocation = droneLocationValue.value as! CLLocation 
         let droneCoordinates = droneLocation.coordinate
         
         if !CLLocationCoordinate2DIsValid(droneCoordinates) {
