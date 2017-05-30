@@ -10,6 +10,8 @@ import UIKit
 import DJISDK
 import VideoPreviewer
 import GoogleMaps
+import FirebaseDatabase
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -19,6 +21,14 @@ class ViewController: UIViewController {
     
     var aircraftMarker: GMSMarker!
     var camera: DJICamera?
+    var markers : [GMSMarker] = []
+    var waypoints : [WaypointModel] = []
+    
+    var filePath : String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as NSURL
+        return url.appendingPathComponent("WaypointModel")!.path
+    }
     
     fileprivate var _isSimulatorActive: Bool = false
     
@@ -44,9 +54,13 @@ class ViewController: UIViewController {
         }
     }
     
+    //Firebase Storage Initialization
+    var ref = Database.database().reference()
+    let userID = Auth.auth().currentUser?.uid
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        googleMapView.delegate = self
         // Start listening for aircraft location updates
         let locationKey = DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation)
         DJISDKManager.keyManager()?.startListeningForChanges(on: locationKey!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
@@ -99,6 +113,38 @@ class ViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
         googleMapView.camera = camera
         googleMapView.mapType = GMSMapViewType.hybrid
+        
+        self.waypoints = fetchWaypointsFromLocal()
+
+        // Check Local Waypoinys Added in any previous session
+        setupWaypoinys()
+        
+        // Check Waypoints from Firebase Database
+        fetchAllWaypointsFromCloundStorage { (waypoints) in
+            for wp in waypoints {
+
+                if self.waypoints.count > 0 {
+                // IF there are local Waypoints available then only add which are not here
+                    var found = false
+                    for wpLocal in self.waypoints {
+                    
+                        if wpLocal.latitude == wp.latitude && wpLocal.longitude == wp.longitude {
+                        
+                            found = true
+                        }
+                    }
+                    
+                    if !found {
+                        self.waypoints.append(wp)
+                    }
+                }else{
+                    // IF No Local Waypoints available then add all fropm cloud storage
+                    self.waypoints.append(wp)
+                }
+            }
+            // Draw ON Map
+            self.setupWaypoinys()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -390,4 +436,69 @@ extension ViewController : DJIVideoFeedListener {
         }
     }
     
+}
+
+//MARK:- Private Methods
+fileprivate extension ViewController {
+
+    func setupWaypoinys() -> Void {
+        for waypoint in self.waypoints {
+            
+            //ADDING MARKER ON MAP
+            let coordinate = CLLocationCoordinate2DMake(waypoint.latitude, waypoint.longitude)
+            let marker = GMSMarker(position: coordinate)
+            marker.icon = UIImage(named: "map-marker")
+            marker.map = googleMapView
+            markers.append(marker)
+
+        }
+        zoomToPoints()
+    }
+    
+    func zoomToPoints() -> Void {
+        
+        if markers.count == 0 {return}
+        
+        var bounds = GMSCoordinateBounds()
+        for marker in markers
+        {
+            bounds = bounds.includingCoordinate(marker.position)
+        }
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+        googleMapView.animate(with: update)
+    }
+    
+    //MARK:- Save & Fetch Wapoints Form Local
+    func saveWaypoints() -> Void {
+        let success = NSKeyedArchiver.archiveRootObject(waypoints, toFile: filePath)
+        debugPrint(success ? "SAVED" : "ERROR IN SAVING")
+    }
+    
+    func fetchWaypointsFromLocal() -> [WaypointModel] {
+        if let array = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [WaypointModel] {
+            return array
+        }
+        return []
+    }
+
+}
+
+//MARK:- GOOGLE MAP DELEGATE
+extension ViewController : GMSMapViewDelegate {
+
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        
+        //ADDING MARKER ON MAP
+        let marker = GMSMarker(position: coordinate)
+        marker.icon = UIImage(named: "map-marker")
+        marker.map = googleMapView
+        markers.append(marker)
+        
+        //SAVING WAYPOINT IN LOCAL
+        let waypoint = WaypointModel(latitude: coordinate.latitude, longitude: coordinate.longitude, altitude: 27, heading: 0, actionRepeatTimes: 1, actionTimeoutInSeconds: 60, cornerRadiusInMeters: 5, turnMode: 0, gimbalPitch: 0)
+        waypoints.append(waypoint)
+        saveWaypoints()
+        
+        self.addWayPointToCloudStoraga(waypoint: waypoint)
+    }
 }

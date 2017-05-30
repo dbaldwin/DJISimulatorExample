@@ -16,7 +16,11 @@
 		23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; };
 		23DB37BB1EB0F883001468F9 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */; };
-		6BFF0A532FD29526D12DA73C /* libPods-DJISimulatorExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */; };
+		71471C691EDD7F1600DA1858 /* Waypoint+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */; };
+		714CEF3F1EDBFA4000C13807 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */; };
+		714CEF411EDBFA4600C13807 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF401EDBFA4600C13807 /* LoginViewController.swift */; };
+		714CEF451EDC347100C13807 /* WaypointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF441EDC347100C13807 /* WaypointModel.swift */; };
+		F025B3075E195A359CF38FCC /* Pods_DJISimulatorExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E79A71C0179FDFEE739801A /* Pods_DJISimulatorExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E79A71C0179FDFEE739801A /* Pods_DJISimulatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DJISimulatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		232695971EAF9E96003E8C57 /* DJISimulatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJISimulatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2326959A1EAF9E96003E8C57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2326959C1EAF9E96003E8C57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +75,10 @@
 		232695B11EAF9E96003E8C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
-		349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DJISimulatorExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Waypoint+Firebase.swift"; sourceTree = "<group>"; };
+		714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		714CEF401EDBFA4600C13807 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		714CEF441EDC347100C13807 /* WaypointModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointModel.swift; sourceTree = "<group>"; };
 		E94F7FC4C4B6249A3ECA2448 /* Pods-DJISimulatorExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DJISimulatorExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DJISimulatorExample/Pods-DJISimulatorExample.debug.xcconfig"; sourceTree = "<group>"; };
 		EE113D8EA3B2078E627C045D /* Pods-DJISimulatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DJISimulatorExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-DJISimulatorExample/Pods-DJISimulatorExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */,
-				6BFF0A532FD29526D12DA73C /* libPods-DJISimulatorExample.a in Frameworks */,
+				F025B3075E195A359CF38FCC /* Pods_DJISimulatorExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,12 +127,16 @@
 			isa = PBXGroup;
 			children = (
 				2326959A1EAF9E96003E8C57 /* AppDelegate.swift */,
+				714CEF401EDBFA4600C13807 /* LoginViewController.swift */,
 				2326959C1EAF9E96003E8C57 /* ViewController.swift */,
 				2326959E1EAF9E96003E8C57 /* Main.storyboard */,
 				232695A11EAF9E96003E8C57 /* Assets.xcassets */,
 				232695A31EAF9E96003E8C57 /* LaunchScreen.storyboard */,
 				232695A61EAF9E96003E8C57 /* Info.plist */,
+				714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */,
 				23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */,
+				714CEF441EDC347100C13807 /* WaypointModel.swift */,
+				71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */,
 			);
 			path = DJISimulatorExample;
 			sourceTree = "<group>";
@@ -150,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */,
-				349110B8AF4C6EBC41D35771 /* libPods-DJISimulatorExample.a */,
+				1E79A71C0179FDFEE739801A /* Pods_DJISimulatorExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,8 +231,7 @@
 				TargetAttributes = {
 					232695961EAF9E96003E8C57 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = TP7ZU94CZV;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					232695AA1EAF9E96003E8C57 = {
 						CreatedOnToolsVersion = 8.2;
@@ -270,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				232695A51EAF9E96003E8C57 /* LaunchScreen.storyboard in Resources */,
+				714CEF3F1EDBFA4000C13807 /* GoogleService-Info.plist in Resources */,
 				232695A21EAF9E96003E8C57 /* Assets.xcassets in Resources */,
 				232695A01EAF9E96003E8C57 /* Main.storyboard in Resources */,
 			);
@@ -337,6 +349,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714CEF451EDC347100C13807 /* WaypointModel.swift in Sources */,
+				71471C691EDD7F1600DA1858 /* Waypoint+Firebase.swift in Sources */,
+				714CEF411EDBFA4600C13807 /* LoginViewController.swift in Sources */,
 				23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */,
 				2326959D1EAF9E96003E8C57 /* ViewController.swift in Sources */,
 				2326959B1EAF9E96003E8C57 /* AppDelegate.swift in Sources */,
@@ -484,13 +499,15 @@
 			baseConfigurationReference = E94F7FC4C4B6249A3ECA2448 /* Pods-DJISimulatorExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -500,13 +517,15 @@
 			baseConfigurationReference = EE113D8EA3B2078E627C045D /* Pods-DJISimulatorExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

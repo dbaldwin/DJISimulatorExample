@@ -8,6 +8,11 @@
 
 import UIKit
 import GoogleMaps
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,10 +27,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.productCommunicationManager.registerWithSDK()
         
+        FirebaseApp.configure()
         GMSServices.provideAPIKey("AIzaSyDwU_Twls3FwrPH5VkZv7qZ_61tWe0r6Wc")
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         return true
     }
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            
+            if url.absoluteString.range(of: "com.googleusercontent.apps") != nil {
+                
+                return GIDSignIn.sharedInstance().handle(url,
+                                                         sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                         annotation: [:])
+
+            }else{
+                return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+                
+            }
+            
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

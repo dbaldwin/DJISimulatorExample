@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UP6-gQ-E3N">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -184,6 +185,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139.453125" y="100"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="ZXX-ue-jFg">
+            <objects>
+                <viewController id="UP6-gQ-E3N" customClass="LoginViewController" customModule="DJISimulatorExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vRE-UE-wQa"/>
+                        <viewControllerLayoutGuide type="bottom" id="xug-Xf-a7h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tgm-aH-SLV">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="KSY-ht-T2t">
+                                <rect key="frame" x="494" y="245.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AxL-fv-bIJ" customClass="GIDSignInButton">
+                                <rect key="frame" x="392" y="311.5" width="240" height="45"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" placeholder="YES" id="fdC-in-hak"/>
+                                    <constraint firstAttribute="width" constant="240" placeholder="YES" id="kNr-9b-BQ1"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="actionOnLoginWithGoogleButton:" destination="UP6-gQ-E3N" eventType="valueChanged" id="0cg-Sb-5NT"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0x-oT-yY4">
+                                <rect key="frame" x="392" y="406.5" width="240" height="40.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Login With Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionOnFacebookLogin:" destination="UP6-gQ-E3N" eventType="touchUpInside" id="Tya-i3-fbe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="b0x-oT-yY4" firstAttribute="top" secondItem="AxL-fv-bIJ" secondAttribute="bottom" constant="50" id="5qL-hM-8Tx"/>
+                            <constraint firstItem="AxL-fv-bIJ" firstAttribute="centerX" secondItem="tgm-aH-SLV" secondAttribute="centerX" id="Bgv-KB-hoR"/>
+                            <constraint firstItem="KSY-ht-T2t" firstAttribute="centerX" secondItem="tgm-aH-SLV" secondAttribute="centerX" id="ExK-gw-2fA"/>
+                            <constraint firstItem="b0x-oT-yY4" firstAttribute="leading" secondItem="AxL-fv-bIJ" secondAttribute="leading" id="FSW-s3-KaS"/>
+                            <constraint firstItem="AxL-fv-bIJ" firstAttribute="centerY" secondItem="tgm-aH-SLV" secondAttribute="centerY" constant="-50" id="HXb-fX-WQF"/>
+                            <constraint firstItem="KSY-ht-T2t" firstAttribute="centerY" secondItem="tgm-aH-SLV" secondAttribute="centerY" constant="-120" id="Qzl-aU-cSn"/>
+                            <constraint firstItem="b0x-oT-yY4" firstAttribute="trailing" secondItem="AxL-fv-bIJ" secondAttribute="trailing" id="lHj-e6-e9q"/>
+                            <constraint firstItem="b0x-oT-yY4" firstAttribute="height" secondItem="AxL-fv-bIJ" secondAttribute="height" multiplier="0.9" id="usQ-HW-z2m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="KSY-ht-T2t" id="OaC-zk-GOM"/>
+                        <outlet property="signInButton" destination="AxL-fv-bIJ" id="fdb-HR-xrn"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="home" id="Xqo-7G-d66"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cg0-Er-088" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-551.3671875" y="98.4375"/>
         </scene>
     </scenes>
 </document>
