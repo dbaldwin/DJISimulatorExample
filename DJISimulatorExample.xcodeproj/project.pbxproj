@@ -16,8 +16,8 @@
 		23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; };
 		23DB37BB1EB0F883001468F9 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */; };
+		6D10710D1EE56EED00AFA377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D10710C1EE56EED00AFA377 /* GoogleService-Info.plist */; };
 		71471C691EDD7F1600DA1858 /* Waypoint+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */; };
-		714CEF3F1EDBFA4000C13807 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */; };
 		714CEF411EDBFA4600C13807 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF401EDBFA4600C13807 /* LoginViewController.swift */; };
 		714CEF451EDC347100C13807 /* WaypointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF441EDC347100C13807 /* WaypointModel.swift */; };
 		F025B3075E195A359CF38FCC /* Pods_DJISimulatorExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E79A71C0179FDFEE739801A /* Pods_DJISimulatorExample.framework */; };
@@ -75,8 +75,8 @@
 		232695B11EAF9E96003E8C57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
+		6D10710C1EE56EED00AFA377 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Waypoint+Firebase.swift"; sourceTree = "<group>"; };
-		714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		714CEF401EDBFA4600C13807 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		714CEF441EDC347100C13807 /* WaypointModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointModel.swift; sourceTree = "<group>"; };
 		E94F7FC4C4B6249A3ECA2448 /* Pods-DJISimulatorExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DJISimulatorExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DJISimulatorExample/Pods-DJISimulatorExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 				232695A11EAF9E96003E8C57 /* Assets.xcassets */,
 				232695A31EAF9E96003E8C57 /* LaunchScreen.storyboard */,
 				232695A61EAF9E96003E8C57 /* Info.plist */,
-				714CEF3E1EDBFA4000C13807 /* GoogleService-Info.plist */,
+				6D10710C1EE56EED00AFA377 /* GoogleService-Info.plist */,
 				23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */,
 				714CEF441EDC347100C13807 /* WaypointModel.swift */,
 				71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */,
@@ -281,7 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				232695A51EAF9E96003E8C57 /* LaunchScreen.storyboard in Resources */,
-				714CEF3F1EDBFA4000C13807 /* GoogleService-Info.plist in Resources */,
+				6D10710D1EE56EED00AFA377 /* GoogleService-Info.plist in Resources */,
 				232695A21EAF9E96003E8C57 /* Assets.xcassets in Resources */,
 				232695A01EAF9E96003E8C57 /* Main.storyboard in Resources */,
 			);

@@ -95,7 +95,7 @@ fileprivate extension LoginViewController {
                 self.showAlert(title: "Message", message: "Could not sign in right now, Please try again later")
                 return
             }else{
-                self.performSegue(withIdentifier: "home", sender: nil)
+                self.performSegue(withIdentifier: "backToDB", sender: nil)
             }
         }
     }

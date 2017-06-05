@@ -17,6 +17,7 @@ struct SerializationKeys {
     static let cornerRadiusInMeters = "cornerRadiusInMeters"
     static let turnMode   = "turnMode"
     static let gimbalPitch   = "gimbalPitch"
+    static let syncedWithCloud   = "syncedWithCloud"
 }
 
 class WaypointModel: NSObject,NSCoding {
@@ -31,8 +32,9 @@ class WaypointModel: NSObject,NSCoding {
     var cornerRadiusInMeters: Float
     var turnMode: UInt
     var gimbalPitch: Float
+    var syncedWithCloud: Bool = false
     
-    init(latitude:Double,longitude: Double, altitude: Float, heading:Float, actionRepeatTimes:UInt,actionTimeoutInSeconds:Int32,cornerRadiusInMeters:Float,turnMode:UInt,gimbalPitch:Float) {
+    init(latitude:Double,longitude: Double, altitude: Float, heading:Float, actionRepeatTimes:UInt,actionTimeoutInSeconds:Int32,cornerRadiusInMeters:Float,turnMode:UInt,gimbalPitch:Float,syncedWithCloud:Bool) {
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
@@ -42,6 +44,7 @@ class WaypointModel: NSObject,NSCoding {
         self.cornerRadiusInMeters = cornerRadiusInMeters
         self.turnMode = turnMode
         self.gimbalPitch = gimbalPitch
+        self.syncedWithCloud = syncedWithCloud
     }
     // MARK: NSCoding
     public convenience required init?(coder aDecoder: NSCoder) {
@@ -55,8 +58,9 @@ class WaypointModel: NSObject,NSCoding {
         let cornerRadiusInMeters = aDecoder.decodeFloat(forKey: SerializationKeys.cornerRadiusInMeters)
         let turnMode = aDecoder.decodeObject(forKey: SerializationKeys.turnMode) as! UInt
         let gimbalPitch = aDecoder.decodeFloat(forKey: SerializationKeys.gimbalPitch)
+        let syncedWithCloud = aDecoder.decodeBool(forKey: SerializationKeys.syncedWithCloud)
 
-        self.init(latitude:latitude,longitude:longitude, altitude: altitude, heading:heading, actionRepeatTimes:actionRepeatTimes,actionTimeoutInSeconds:actionTimeoutInSeconds,cornerRadiusInMeters:cornerRadiusInMeters,turnMode:turnMode,gimbalPitch:gimbalPitch)
+        self.init(latitude:latitude,longitude:longitude, altitude: altitude, heading:heading, actionRepeatTimes:actionRepeatTimes,actionTimeoutInSeconds:actionTimeoutInSeconds,cornerRadiusInMeters:cornerRadiusInMeters,turnMode:turnMode,gimbalPitch:gimbalPitch,syncedWithCloud:syncedWithCloud)
     }
     
     func encode(with aCoder: NSCoder) {
@@ -69,6 +73,7 @@ class WaypointModel: NSObject,NSCoding {
         aCoder.encode(cornerRadiusInMeters, forKey: SerializationKeys.cornerRadiusInMeters)
         aCoder.encode(turnMode, forKey: SerializationKeys.turnMode)
         aCoder.encode(gimbalPitch, forKey: SerializationKeys.gimbalPitch)
+        aCoder.encode(syncedWithCloud, forKey: SerializationKeys.syncedWithCloud)
     }
 
     public func dictionaryRepresentation() -> [String: Any] {
@@ -83,6 +88,7 @@ class WaypointModel: NSObject,NSCoding {
         dictionary[SerializationKeys.cornerRadiusInMeters] = cornerRadiusInMeters
         dictionary[SerializationKeys.turnMode] = turnMode
         dictionary[SerializationKeys.gimbalPitch] = gimbalPitch
+        dictionary[SerializationKeys.syncedWithCloud] = syncedWithCloud
         
         return dictionary
     }

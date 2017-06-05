@@ -8,12 +8,18 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 import UIKit
 
 extension ViewController {
 
     // ADD WAYPOINT IN FIREBASE SERVER
-    func addWayPointToCloudStoraga(waypoint:WaypointModel) -> Void {
+    func addWayPointToCloudStorage(waypoint:WaypointModel) -> Void {
+
+        //Firebase Storage Initialization
+        let ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        
         let waypointRef = ref.child("users").child("\(userID!)").child("waypoints").childByAutoId()
         waypointRef.child(SerializationKeys.latitude).setValue(waypoint.latitude)
         waypointRef.child(SerializationKeys.longitude).setValue(waypoint.longitude)
@@ -28,7 +34,11 @@ extension ViewController {
     
     //FETCH ALL WAYPOINTS FROM FIREBASE SERVER
     func fetchAllWaypointsFromCloundStorage(completion:@escaping (([WaypointModel])->Void)){
-
+        let userID = Auth.auth().currentUser?.uid
+        if userID == nil {
+            return
+        }
+        let ref = Database.database().reference()
         let waypointRef = ref.child("users").child("\(userID!)").child("waypoints")
         waypointRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
 
@@ -41,7 +51,7 @@ extension ViewController {
             
                 let childDic = child.value as? NSDictionary
 
-                let waypoint = WaypointModel(latitude: childDic?[SerializationKeys.latitude] as? Double ?? 0, longitude: childDic?[SerializationKeys.longitude] as? Double ?? 0, altitude: childDic?[SerializationKeys.altitude] as? Float ?? 0, heading: childDic?[SerializationKeys.heading] as? Float ?? 0, actionRepeatTimes: UInt(childDic?[SerializationKeys.actionRepeatTimes] as? Int ?? 0), actionTimeoutInSeconds: childDic?[SerializationKeys.actionTimeoutInSeconds] as? Int32 ?? 0, cornerRadiusInMeters: childDic?[SerializationKeys.cornerRadiusInMeters] as? Float ?? 0, turnMode: UInt(childDic?[SerializationKeys.turnMode] as? Int ?? 0), gimbalPitch: childDic?[SerializationKeys.gimbalPitch] as? Float ?? 0)
+                let waypoint = WaypointModel(latitude: childDic?[SerializationKeys.latitude] as? Double ?? 0, longitude: childDic?[SerializationKeys.longitude] as? Double ?? 0, altitude: childDic?[SerializationKeys.altitude] as? Float ?? 0, heading: childDic?[SerializationKeys.heading] as? Float ?? 0, actionRepeatTimes: UInt(childDic?[SerializationKeys.actionRepeatTimes] as? Int ?? 0), actionTimeoutInSeconds: childDic?[SerializationKeys.actionTimeoutInSeconds] as? Int32 ?? 0, cornerRadiusInMeters: childDic?[SerializationKeys.cornerRadiusInMeters] as? Float ?? 0, turnMode: UInt(childDic?[SerializationKeys.turnMode] as? Int ?? 0), gimbalPitch: childDic?[SerializationKeys.gimbalPitch] as? Float ?? 0, syncedWithCloud: true)
                 waypoints.append(waypoint)
             }
         }

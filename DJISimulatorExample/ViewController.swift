@@ -53,10 +53,6 @@ class ViewController: UIViewController {
             checkPhotoSaved()
         }
     }
-    
-    //Firebase Storage Initialization
-    var ref = Database.database().reference()
-    let userID = Auth.auth().currentUser?.uid
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,32 +115,6 @@ class ViewController: UIViewController {
         // Check Local Waypoinys Added in any previous session
         setupWaypoinys()
         
-        // Check Waypoints from Firebase Database
-        fetchAllWaypointsFromCloundStorage { (waypoints) in
-            for wp in waypoints {
-
-                if self.waypoints.count > 0 {
-                // IF there are local Waypoints available then only add which are not here
-                    var found = false
-                    for wpLocal in self.waypoints {
-                    
-                        if wpLocal.latitude == wp.latitude && wpLocal.longitude == wp.longitude {
-                        
-                            found = true
-                        }
-                    }
-                    
-                    if !found {
-                        self.waypoints.append(wp)
-                    }
-                }else{
-                    // IF No Local Waypoints available then add all fropm cloud storage
-                    self.waypoints.append(wp)
-                }
-            }
-            // Draw ON Map
-            self.setupWaypoinys()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,6 +156,63 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK:- UIButton Action Method
+    @IBAction func actionOnsaveWaypointsButton(_ sender: Any) {
+        if Auth.auth().currentUser == nil {
+            self.performSegue(withIdentifier: "login", sender: nil)
+        }else{
+            self.showAlert(title: "Message", message: "All waypoints are synched with Cloud")
+        }
+    }
+    
+    // This method is called when user came back from login screen
+    @IBAction func backToDashboard(segue:UIStoryboardSegue){
+        // User is logged In now ?
+        if Auth.auth().currentUser != nil {
+            let allWaypoinys = waypoints
+            waypoints.removeAll()
+            for waypoint in allWaypoinys {
+                //If Waypoint is not syched with cloud
+                if waypoint.syncedWithCloud == false {
+                    waypoint.syncedWithCloud = true
+                    self.addWayPointToCloudStorage(waypoint: waypoint)
+                }
+                waypoints.append(waypoint)
+            }
+            saveWaypoints()
+            //Check Waypoints from Firebase Database
+            fetchAllWaypointsFromCloundStorage { (waypoints) in
+                for wp in waypoints {
+                    
+                    if self.waypoints.count > 0 {
+                        // IF there are local Waypoints available then only add which are not here
+                        var found = false
+                        for wpLocal in self.waypoints {
+                            
+                            if wpLocal.latitude == wp.latitude && wpLocal.longitude == wp.longitude {
+                                
+                                found = true
+                            }
+                        }
+                        
+                        if !found {
+                            self.waypoints.append(wp)
+                        }
+                    }else{
+                        // IF No Local Waypoints available then add all from cloud storage
+                        self.waypoints = waypoints
+                        self.saveWaypoints()
+                        break
+                    }
+                }
+                // Draw ON Map
+                self.setupWaypoinys()
+            }
+
+        }
+        
     }
     
     func productConnected() {
@@ -495,10 +522,14 @@ extension ViewController : GMSMapViewDelegate {
         markers.append(marker)
         
         //SAVING WAYPOINT IN LOCAL
-        let waypoint = WaypointModel(latitude: coordinate.latitude, longitude: coordinate.longitude, altitude: 27, heading: 0, actionRepeatTimes: 1, actionTimeoutInSeconds: 60, cornerRadiusInMeters: 5, turnMode: 0, gimbalPitch: 0)
+        let sycnhedWithCloud = Auth.auth().currentUser == nil ? false : true
+        
+        let waypoint = WaypointModel(latitude: coordinate.latitude, longitude: coordinate.longitude, altitude: 27, heading: 0, actionRepeatTimes: 1, actionTimeoutInSeconds: 60, cornerRadiusInMeters: 5, turnMode: 0, gimbalPitch: 0, syncedWithCloud: sycnhedWithCloud)
         waypoints.append(waypoint)
         saveWaypoints()
         
-        self.addWayPointToCloudStoraga(waypoint: waypoint)
+        if sycnhedWithCloud {
+            self.addWayPointToCloudStorage(waypoint: waypoint)
+        }
     }
 }

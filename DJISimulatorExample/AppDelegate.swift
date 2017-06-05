@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GMSServices.provideAPIKey("AIzaSyDwU_Twls3FwrPH5VkZv7qZ_61tWe0r6Wc")
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        
+        try! Auth.auth().signOut()
         return true
     }
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
