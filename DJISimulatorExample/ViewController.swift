@@ -12,17 +12,26 @@ import VideoPreviewer
 import GoogleMaps
 import FirebaseDatabase
 import FirebaseAuth
+import StoreKit
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var googleMapView: GMSMapView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var debugLabel: UILabel!
+    @IBOutlet weak var buttonSaveWaypoints: UIButton!
+    @IBOutlet weak var buttonBuy: UIButton!
+    @IBOutlet weak var buttonRestore: UIButton!
     
     var aircraftMarker: GMSMarker!
     var camera: DJICamera?
     var markers : [GMSMarker] = []
     var waypoints : [WaypointModel] = []
+
+    //////////////////////IAP////////////////////////
+    var product: SKProduct?
+    var canPurchaseNow: Bool = false
+    /////////////////////////////////////////////////
     
     var filePath : String {
         let manager = FileManager.default
@@ -115,6 +124,21 @@ class ViewController: UIViewController {
         // Check Local Waypoinys Added in any previous session
         setupWaypoinys()
         
+        // ADDING OBSERVER FOR IAP PURCHASE NOTIFICATIONS
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
+                                               object: nil)
+
+        if !DJIWaypoinyProducts.store.isProductPurchased(DJIWaypoinyProducts.waypointCloudSyncNonConsumable) {
+            reload()
+            buttonSaveWaypoints.isEnabled = false
+            buttonBuy.isEnabled = true
+        }else{
+            buttonSaveWaypoints.isEnabled = true
+            buttonBuy.isHidden = true
+            buttonRestore.isHidden = true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,11 +153,9 @@ class ViewController: UIViewController {
             DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
                 if newValue != nil {
                     if newValue!.boolValue {
-                        
                         DispatchQueue.main.async {
                             self.productConnected()
                         }
-                        
                     }
                 }
             })
@@ -159,6 +181,18 @@ class ViewController: UIViewController {
     }
     
     //MARK:- UIButton Action Method
+    @IBAction func actionOnRestore(_ sender: Any) {
+        DJIWaypoinyProducts.store.restorePurchases()
+    }
+    
+    @IBAction func actionOnBuy(_ sender: Any) {
+        if self.product != nil {
+            self.buy(product: self.product!)
+        }else{
+            self.canPurchaseNow = true
+        }
+    }
+    
     @IBAction func actionOnsaveWaypointsButton(_ sender: Any) {
         if Auth.auth().currentUser == nil {
             self.performSegue(withIdentifier: "login", sender: nil)
@@ -335,7 +369,7 @@ class ViewController: UIViewController {
         
         DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
         DJISDKManager.missionControl()?.scheduleElement(defaultWaypointMission()!)
-        
+    
         let attitude = DJIGimbalAttitude(pitch: 30.0, roll: 0.0, yaw: 0.0)
         DJISDKManager.missionControl()?.scheduleElement(DJIGimbalAttitudeAction(attitude: attitude)!)
         
@@ -513,6 +547,7 @@ fileprivate extension ViewController {
 //MARK:- GOOGLE MAP DELEGATE
 extension ViewController : GMSMapViewDelegate {
 
+    // Tap On Map
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
         //ADDING MARKER ON MAP
@@ -532,4 +567,114 @@ extension ViewController : GMSMapViewDelegate {
             self.addWayPointToCloudStorage(waypoint: waypoint)
         }
     }
+    
+    // Tap On Waypoint
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        if DJISDKManager.product() != nil {
+            self.uploadWaypointMission(with: marker.position)
+        }
+        
+        return true
+    }
+}
+
+// DJI-Aircraft panaroma mission 
+extension ViewController {
+
+    func initializePanaromaMissionWithCoordinate(coordinate:CLLocationCoordinate2D){
+    
+        let mission = DJIMutableWaypointMission()
+        mission.maxFlightSpeed = 15
+        mission.autoFlightSpeed = 8
+        mission.finishedAction = .noAction
+        mission.headingMode = .auto
+        mission.flightPathMode = .normal
+        mission.rotateGimbalPitch = true
+        mission.exitMissionOnRCSignalLost = true
+        
+        let waypoint = DJIWaypoint(coordinate: coordinate)
+        waypoint.altitude = 27
+        waypoint.heading = 0
+        waypoint.actionRepeatTimes = 1
+        waypoint.actionTimeoutInSeconds = 60
+        waypoint.cornerRadiusInMeters = 5
+        waypoint.turnMode = .clockwise
+        waypoint.gimbalPitch = 0
+
+
+        let ROTATE_ANGLE : Double = 60
+        for i in 0..<6 {
+            var rotateAngle = ROTATE_ANGLE * Double(i)
+            if (rotateAngle > 180) { //Filter the angle between -180 ~ 0, 0 ~ 180
+                rotateAngle = rotateAngle - 360;
+            }
+            
+            let action1 = DJIWaypointAction.init(actionType: .shootPhoto, param: 0)
+            let action2 = DJIWaypointAction.init(actionType: .rotateAircraft, param: Int16(rotateAngle))
+
+            waypoint.add(action1)
+            waypoint.add(action2)
+
+        }
+        
+        mission.add(waypoint)
+        mission.finishedAction =  .noAction
+        
+        let error = missionoperator()?.load(mission)
+        if error == nil {
+        
+            missionoperator()?.addListener(toUploadEvent: self, with: DispatchQueue.main, andBlock: { (event) in
+                
+                if event.currentState == .uploading {
+                    debugPrint("UPLOADING MISSION--UPLOADING MISSION--UPLOADING MISSION--UPLOADING MISSION")
+                }else if event.currentState == .readyToExecute {
+                    self.startWaypointMission()
+                    debugPrint("MISSION UPLOADED--MISSION UPLOADED--MISSION UPLOADED--MISSION UPLOADED")
+                    debugPrint("STARTING MISSION EXECUTION--STARTING MISSION EXECUTION-STARTING MISSION EXECUTION")
+                }
+            })
+            
+            missionoperator()?.addListener(toFinished: self, with: DispatchQueue.main, andBlock: { (error) in
+                if (error != nil) {
+                    debugPrint("MISSION EXECUTION ERROR ---\(String(describing: error?.localizedDescription))")
+                }else{
+                    debugPrint("MISSION EXECUTION FINISHED -- MISSION EXECUTION FINISHED")
+                }
+            })
+        }
+        
+    }
+    
+    func missionoperator() -> DJIWaypointMissionOperator? {
+        return DJISDKManager.missionControl()?.waypointMissionOperator()
+    }
+    
+    func uploadWaypointMission(with coordinate:CLLocationCoordinate2D) {
+    
+        self.initializePanaromaMissionWithCoordinate(coordinate: coordinate)
+    
+        self.missionoperator()?.uploadMission(completion: { (error) in
+            
+            if (error != nil) {
+                debugPrint("Upload Mission Failed \(String(describing: error?.localizedDescription))")
+            }else{
+                debugPrint("Upload Mission FINISHED")
+            }
+        })
+        
+    }
+    
+    func startWaypointMission(){
+        
+        
+        self.missionoperator()?.startMission(completion: { (error) in
+            if error != nil {
+                debugPrint("START Mission Failed \(String(describing: error?.localizedDescription))")
+            }else{
+                debugPrint("START Mission SUCCESS")
+            }
+        })
+    }
+
 }

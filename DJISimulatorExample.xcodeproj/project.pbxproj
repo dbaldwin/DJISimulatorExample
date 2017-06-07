@@ -17,6 +17,10 @@
 		23DB37BB1EB0F883001468F9 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23DB37B91EB0F866001468F9 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */; };
 		6D10710D1EE56EED00AFA377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D10710C1EE56EED00AFA377 /* GoogleService-Info.plist */; };
+		6D3C19C31EE6D54200C51D4B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3C19C11EE6D54200C51D4B /* IAPHelper.swift */; };
+		6D3C19C41EE6D54200C51D4B /* DJIWaypoinyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3C19C21EE6D54200C51D4B /* DJIWaypoinyProducts.swift */; };
+		6D3C19C71EE6D7AE00C51D4B /* Waypoint+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3C19C61EE6D7AE00C51D4B /* Waypoint+IAP.swift */; };
+		6D3C19C91EE6E8BB00C51D4B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3C19C81EE6E8BB00C51D4B /* StoreKit.framework */; };
 		71471C691EDD7F1600DA1858 /* Waypoint+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */; };
 		714CEF411EDBFA4600C13807 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF401EDBFA4600C13807 /* LoginViewController.swift */; };
 		714CEF451EDC347100C13807 /* WaypointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714CEF441EDC347100C13807 /* WaypointModel.swift */; };
@@ -76,6 +80,10 @@
 		23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
 		6D10710C1EE56EED00AFA377 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6D3C19C11EE6D54200C51D4B /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		6D3C19C21EE6D54200C51D4B /* DJIWaypoinyProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJIWaypoinyProducts.swift; sourceTree = "<group>"; };
+		6D3C19C61EE6D7AE00C51D4B /* Waypoint+IAP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Waypoint+IAP.swift"; sourceTree = "<group>"; };
+		6D3C19C81EE6E8BB00C51D4B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Waypoint+Firebase.swift"; sourceTree = "<group>"; };
 		714CEF401EDBFA4600C13807 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		714CEF441EDC347100C13807 /* WaypointModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointModel.swift; sourceTree = "<group>"; };
@@ -88,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3C19C91EE6E8BB00C51D4B /* StoreKit.framework in Frameworks */,
 				23DB37BA1EB0F883001468F9 /* VideoPreviewer.framework in Frameworks */,
 				F025B3075E195A359CF38FCC /* Pods_DJISimulatorExample.framework in Frameworks */,
 			);
@@ -137,6 +146,7 @@
 				23DB37C01EB115F0001468F9 /* ProductCommunicationManager.swift */,
 				714CEF441EDC347100C13807 /* WaypointModel.swift */,
 				71471C681EDD7F1600DA1858 /* Waypoint+Firebase.swift */,
+				6D3C19C51EE6D54900C51D4B /* IAP */,
 			);
 			path = DJISimulatorExample;
 			sourceTree = "<group>";
@@ -161,10 +171,21 @@
 		35D4B774711BB527FA47697C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D3C19C81EE6E8BB00C51D4B /* StoreKit.framework */,
 				23DB37B41EB0F866001468F9 /* VideoPreviewer.xcodeproj */,
 				1E79A71C0179FDFEE739801A /* Pods_DJISimulatorExample.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D3C19C51EE6D54900C51D4B /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				6D3C19C11EE6D54200C51D4B /* IAPHelper.swift */,
+				6D3C19C21EE6D54200C51D4B /* DJIWaypoinyProducts.swift */,
+				6D3C19C61EE6D7AE00C51D4B /* Waypoint+IAP.swift */,
+			);
+			name = IAP;
 			sourceTree = "<group>";
 		};
 		F136B14027F21A9520A3362C /* Pods */ = {
@@ -231,7 +252,13 @@
 				TargetAttributes = {
 					232695961EAF9E96003E8C57 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 2ZRFJYMMPY;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					232695AA1EAF9E96003E8C57 = {
 						CreatedOnToolsVersion = 8.2;
@@ -354,7 +381,10 @@
 				714CEF411EDBFA4600C13807 /* LoginViewController.swift in Sources */,
 				23DB37C11EB115F0001468F9 /* ProductCommunicationManager.swift in Sources */,
 				2326959D1EAF9E96003E8C57 /* ViewController.swift in Sources */,
+				6D3C19C31EE6D54200C51D4B /* IAPHelper.swift in Sources */,
 				2326959B1EAF9E96003E8C57 /* AppDelegate.swift in Sources */,
+				6D3C19C71EE6D7AE00C51D4B /* Waypoint+IAP.swift in Sources */,
+				6D3C19C41EE6D54200C51D4B /* DJIWaypoinyProducts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,15 +529,16 @@
 			baseConfigurationReference = E94F7FC4C4B6249A3ECA2448 /* Pods-DJISimulatorExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZRFJYMMPY;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopusapps.DroneApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "81653b86-323b-4d67-bd8d-862acdd90abb";
+				PROVISIONING_PROFILE_SPECIFIER = DEV_PROVISION_DRONEAPP;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -517,15 +548,16 @@
 			baseConfigurationReference = EE113D8EA3B2078E627C045D /* Pods-DJISimulatorExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2ZRFJYMMPY;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopusapps.DroneApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "81653b86-323b-4d67-bd8d-862acdd90abb";
+				PROVISIONING_PROFILE_SPECIFIER = DEV_PROVISION_DRONEAPP;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

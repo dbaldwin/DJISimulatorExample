@@ -74,7 +74,7 @@
                                     <constraint firstAttribute="width" secondItem="mZb-xL-XE8" secondAttribute="height" multiplier="541:91" id="QzR-0g-4p2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mah-YU-fbO" customClass="DULCameraConfigInfoWidget">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mah-YU-fbO" customClass="DULCameraConfigInfoWidget" customModule="DJISimulatorExample" customModuleProvider="target">
                                 <rect key="frame" x="103.5" y="20" width="261.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="57x-wn-U61"/>
@@ -142,11 +142,25 @@
                                     <action selector="shootPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lO0-Lc-gNZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJ0-NE-74O">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJ0-NE-74O">
                                 <rect key="frame" x="160" y="131" width="132" height="30"/>
                                 <state key="normal" title="Save Waypoints"/>
                                 <connections>
                                     <action selector="actionOnsaveWaypointsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P8Z-Tl-0Mh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZa-65-3dp">
+                                <rect key="frame" x="302" y="131" width="97" height="30"/>
+                                <state key="normal" title="Buy"/>
+                                <connections>
+                                    <action selector="actionOnBuy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fZs-dL-0lk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gD-sF-rr9">
+                                <rect key="frame" x="409" y="131" width="53" height="30"/>
+                                <state key="normal" title="Restore"/>
+                                <connections>
+                                    <action selector="actionOnRestore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JGj-Xn-Gki"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -154,17 +168,21 @@
                         <constraints>
                             <constraint firstItem="mZb-xL-XE8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0D3-u9-fgu"/>
                             <constraint firstItem="Qbg-5N-5Kq" firstAttribute="top" secondItem="hoP-QT-3nf" secondAttribute="bottom" constant="10" id="0hY-iE-pck"/>
+                            <constraint firstItem="8gD-sF-rr9" firstAttribute="leading" secondItem="qZa-65-3dp" secondAttribute="trailing" constant="10" id="5OL-by-68Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qbg-5N-5Kq" secondAttribute="bottom" constant="15" id="5x9-hj-7Dm"/>
                             <constraint firstItem="hoP-QT-3nf" firstAttribute="top" secondItem="ljQ-8o-RAG" secondAttribute="bottom" constant="10" id="7oL-nl-3CA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mZb-xL-XE8" secondAttribute="bottom" constant="40" id="BoF-5o-IfV"/>
+                            <constraint firstItem="8gD-sF-rr9" firstAttribute="centerY" secondItem="qZa-65-3dp" secondAttribute="centerY" id="EEK-b2-Hcf"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FW4-1z-D83"/>
                             <constraint firstItem="MNl-EG-dmM" firstAttribute="leading" secondItem="VYm-st-glU" secondAttribute="trailing" constant="10" id="HOk-rb-qYl"/>
                             <constraint firstItem="7ep-XC-ZCs" firstAttribute="leading" secondItem="ljQ-8o-RAG" secondAttribute="trailing" constant="10" id="KDl-wI-ixu"/>
+                            <constraint firstItem="qZa-65-3dp" firstAttribute="leading" secondItem="VYm-st-glU" secondAttribute="leading" id="LhH-ZB-XZf"/>
                             <constraint firstItem="VYm-st-glU" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="MYg-XZ-GaK"/>
                             <constraint firstItem="cJ0-NE-74O" firstAttribute="leading" secondItem="7ep-XC-ZCs" secondAttribute="leading" id="NeY-FN-e5T"/>
                             <constraint firstItem="mah-YU-fbO" firstAttribute="leading" secondItem="Ofq-QZ-DfA" secondAttribute="trailing" constant="10" id="R72-Wq-cWs"/>
                             <constraint firstAttribute="trailing" secondItem="2qn-rj-uOg" secondAttribute="trailing" id="WEd-sa-ch0"/>
                             <constraint firstItem="cJ0-NE-74O" firstAttribute="trailing" secondItem="7ep-XC-ZCs" secondAttribute="trailing" id="YBA-Ow-uAm"/>
+                            <constraint firstItem="qZa-65-3dp" firstAttribute="top" secondItem="VYm-st-glU" secondAttribute="bottom" constant="10" id="ZGb-G0-Vs8"/>
                             <constraint firstItem="mah-YU-fbO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="aGt-ak-rO0"/>
                             <constraint firstItem="lxx-PH-uwe" firstAttribute="top" secondItem="Ofq-QZ-DfA" secondAttribute="bottom" constant="10" id="buD-4r-pAu"/>
                             <constraint firstItem="2qn-rj-uOg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cfc-vf-LpB"/>
@@ -173,6 +191,7 @@
                             <constraint firstItem="7ep-XC-ZCs" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="eB8-Ui-1Tv"/>
                             <constraint firstItem="Ofq-QZ-DfA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="if1-Wm-y91"/>
                             <constraint firstItem="cJ0-NE-74O" firstAttribute="top" secondItem="7ep-XC-ZCs" secondAttribute="bottom" constant="10" id="jVJ-xb-0OM"/>
+                            <constraint firstItem="qZa-65-3dp" firstAttribute="trailing" secondItem="VYm-st-glU" secondAttribute="trailing" id="lWT-8B-5P6"/>
                             <constraint firstItem="Ofq-QZ-DfA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lnk-Xn-FpS"/>
                             <constraint firstItem="ljQ-8o-RAG" firstAttribute="top" secondItem="lxx-PH-uwe" secondAttribute="bottom" constant="10" id="nxe-rE-Caa"/>
                             <constraint firstItem="hoP-QT-3nf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="tJ6-N2-e2P"/>
@@ -182,6 +201,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonBuy" destination="qZa-65-3dp" id="v0T-le-Rg8"/>
+                        <outlet property="buttonRestore" destination="8gD-sF-rr9" id="8Qg-Jq-U6T"/>
+                        <outlet property="buttonSaveWaypoints" destination="cJ0-NE-74O" id="P1n-Ji-ccm"/>
                         <outlet property="cameraView" destination="2qn-rj-uOg" id="6Zg-TE-545"/>
                         <outlet property="checklistButton" destination="VYm-st-glU" id="IRo-yE-dwO"/>
                         <outlet property="debugLabel" destination="MNl-EG-dmM" id="xy5-60-whD"/>
