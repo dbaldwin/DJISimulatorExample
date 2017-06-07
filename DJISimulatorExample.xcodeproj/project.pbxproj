@@ -535,7 +535,7 @@
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopusapps.DroneApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "81653b86-323b-4d67-bd8d-862acdd90abb";
 				PROVISIONING_PROFILE_SPECIFIER = DEV_PROVISION_DRONEAPP;
@@ -554,7 +554,7 @@
 				INFOPLIST_FILE = DJISimulatorExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopusapps.DroneApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unmannedairlines.DJISimulatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "81653b86-323b-4d67-bd8d-862acdd90abb";
 				PROVISIONING_PROFILE_SPECIFIER = DEV_PROVISION_DRONEAPP;
