@@ -583,7 +583,7 @@ extension ViewController : GMSMapViewDelegate {
 extension ViewController {
 
     func initializePanaromaMissionWithCoordinate(coordinate:CLLocationCoordinate2D){
-    
+        
         let mission = DJIMutableWaypointMission()
         mission.maxFlightSpeed = 15
         mission.autoFlightSpeed = 8
@@ -602,6 +602,17 @@ extension ViewController {
         waypoint.turnMode = .clockwise
         waypoint.gimbalPitch = 0
 
+        
+        let waypointDroneLocation = DJIWaypoint(coordinate: aircraftMarker.position)
+        waypointDroneLocation.altitude = 27
+        waypointDroneLocation.heading = 0
+        waypointDroneLocation.actionRepeatTimes = 1
+        waypointDroneLocation.actionTimeoutInSeconds = 60
+        waypointDroneLocation.cornerRadiusInMeters = 5
+        waypointDroneLocation.turnMode = .clockwise
+        waypointDroneLocation.gimbalPitch = 0
+
+        mission.add(waypointDroneLocation)
 
         let ROTATE_ANGLE : Double = 60
         for i in 0..<6 {
@@ -627,11 +638,11 @@ extension ViewController {
             missionoperator()?.addListener(toUploadEvent: self, with: DispatchQueue.main, andBlock: { (event) in
                 
                 if event.currentState == .uploading {
-                    debugPrint("UPLOADING MISSION--UPLOADING MISSION--UPLOADING MISSION--UPLOADING MISSION")
+                    debugPrint("UPLOADING MISSION")
                 }else if event.currentState == .readyToExecute {
                     self.startWaypointMission()
-                    debugPrint("MISSION UPLOADED--MISSION UPLOADED--MISSION UPLOADED--MISSION UPLOADED")
-                    debugPrint("STARTING MISSION EXECUTION--STARTING MISSION EXECUTION-STARTING MISSION EXECUTION")
+                    debugPrint("MISSION UPLOADED")
+                    debugPrint("STARTING MISSION EXECUTION")
                 }
             })
             
@@ -639,7 +650,7 @@ extension ViewController {
                 if (error != nil) {
                     debugPrint("MISSION EXECUTION ERROR ---\(String(describing: error?.localizedDescription))")
                 }else{
-                    debugPrint("MISSION EXECUTION FINISHED -- MISSION EXECUTION FINISHED")
+                    debugPrint("MISSION EXECUTION FINISHED")
                 }
             })
         }
@@ -655,7 +666,6 @@ extension ViewController {
         self.initializePanaromaMissionWithCoordinate(coordinate: coordinate)
     
         self.missionoperator()?.uploadMission(completion: { (error) in
-            
             if (error != nil) {
                 debugPrint("Upload Mission Failed \(String(describing: error?.localizedDescription))")
             }else{
@@ -666,7 +676,6 @@ extension ViewController {
     }
     
     func startWaypointMission(){
-        
         
         self.missionoperator()?.startMission(completion: { (error) in
             if error != nil {
